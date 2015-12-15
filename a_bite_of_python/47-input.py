@@ -9,4 +9,3 @@ if (is_palindrome(something)):
     print('Yeah it\'s palyndrom')
 else:
     print('Not a palyndrom')
-
