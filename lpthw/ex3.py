@@ -29,3 +29,7 @@ print "Is it greater or equal?", 5 >= -2
 #False
 print "Is it less or equal?", 5 <= -2.2
 print "Float == Int?", 7.0 / 4.0 == 7 / 4
+<<<<<<< HEAD
+=======
+
+>>>>>>> 48d2ade0d063388a5bf2219b51b1baf56ebff29d
