@@ -19,7 +19,7 @@ print 'Actually that\'s not too heavy'
 print 'He\'s got %s eyes and %s hair.' % (eyes, hair)
 print "His teeth are usually %s depending on the coffee." % teeth 
 
-#this line is tricky, try to get it exectly right
+#this line is tricky, try to get it exactly right
 print "If i add %d, %d and %d I get %d." % (age, height, weight, age + height + weight)
 print "In pounds / centemiters it will be like: %u pounds and %u inches" % (weight_pou, height_inc)
 
