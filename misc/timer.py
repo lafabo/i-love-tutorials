@@ -10,58 +10,22 @@ import time, sys, subprocess
 # from ossaudiodev import  open as ossOpen
 
 def playsound():
-	'''trying to play wav file
-	with only python standart lib
-	and linux sound system'''
-
-	subprocess.check_output(['bash','-c', 'aplay tada.wav'])
-
-
-	''' - don't work and i don't know why. Cannot find device /dev/dsp ._.
-
-	wavfile = waveOpen('tada.wav', 'rb')
-	(nc, sw, fr, nf, comptype, compname) = wavfile.getparams()
-	dsp = ossOpen('/dev/dsp', 'w')
-
-	try:
-		from ossaudiodev import AFMT_S16_NE
-	except ImportError:
-		if byteorder == 'little':
-			AFMT_S16_NE = ossaudiodev.AFMT_S16_LE
-		else:
-			AFMT_S16_NE = ossaudiodev.AFMT_S16_BE
-
-	dsp.setparameters(AFMT_S16_NE, nc, fr)
-	data = wavfile.readframes(nr)
-	s.close()
-	dsp.write(data)
-	dsp.close()
-	'''
+	subprocess.check_output(['bash', '-c', 'aplay tada.wav'])
 
 
 def userinput_to_seconds(userinput):
-
-	if str(userinput).count(':') == 0: #int(userinput):
-		seconds = int(userinput)
-
-	elif str(userinput).lstrip(':').isdigit():
-
-		if str(userinput).count(':') == 1:
-			print userinput + 'ONE!!!11'
-			userinput = str(userinput).split(':')
-			seconds = int(userinput[1]) + int(userinput[0]) * 60
-
-		elif str(userinput).count(':') == 2:
-			print userinput
-			userinput = str(userinput).split(':')
-			seconds = int(userinput[2]) + int(userinput[1]) * 60 + int(userinput[0]) * 3600
-
-	else:
-		# print "Write H:M:S or M:S or S"
-		print 'Still works only seconds '
-		timer()
-
+	seconds = 0
+	for i, v in enumerate(userinput.split(":")[::-1]):
+		seconds += int(v) * 60**i
 	return seconds
+
+
+def seconds_to_hms(seconds):
+	units = {0: "seconds", 1: "minutes", 2: "hours"}
+	out = []
+	for i, v in enumerate(str(seconds).split(":")[::-1]):
+		out.append("%s %s" % (int(v), units[i]))
+	return out[::-1]
 
 
 def timer():
@@ -88,7 +52,7 @@ def progressbar(total):
 		bar_x = int(round(i * bar_len / total)) # filled bar (percent)
 		time_lasts_percent = int(round(i * 100 / total))
 		bar = '=' * bar_x + '-' * (bar_len - bar_x)
-		sys.stdout.write("\r[%s]%d%% time remain %d seconds" % (bar, time_lasts_percent, (total - i)))
+		sys.stdout.write("\r[%s]%d%% time remain %r" % (bar, time_lasts_percent, (seconds_to_hms(total - i))))
 		sys.stdout.flush()
 
 		# print "\r[%s]%d%%" % (bar, time_lasts_percent) # todo - try to guess how make all of it without sys
@@ -96,5 +60,3 @@ def progressbar(total):
 
 
 timer()
-
-# todo parse XX:XX:XX as H:M:S or if XX:XX -> M:S and etc
