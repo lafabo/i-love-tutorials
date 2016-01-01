@@ -21,5 +21,4 @@ for i in len(string)+1:
 		string = string[:i:]
 		print string
 
-
 print 'final ', string
