@@ -16,7 +16,6 @@ for url in urls.readlines():
 
 		for line in remotefile:
 			savefile.write(line)
-			print line
 
 		savefile.close()
 
