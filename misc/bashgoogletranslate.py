@@ -2,54 +2,37 @@
 #  -*- coding: utf-8 -*-
 '''
 this code uses urllib/2 to parse google translate, no api
-
-via http://habrahabr.ru/post/113243/
 '''
 
+import urllib2, sys
 
-import sys, re, urllib, urllib2, json
+#simple setting: user agent, google translate link, place in html
+agents = {'User-Agent':"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30)"}
+before_trans = 'class="t0">'
 
-def print_params(data):
-	'''print parameters to the data'''
-	for val in data:
-		if isinstance(val, basestring):
-			print '\t' + val
-
-
-def main():
-	'''
-	first arg - string to translate
-	second arg - from lang
-	third arg - to lang
-
-	'hello' en ru
-	:return:
-	'''
-	url = 'http://translate.google.com/translate_a/t?%s'
-	list_of_params = {'client':'t', 'hl': 'en', 'multires':'1'}
+def run():
 	if len(sys.argv) == 4:
-		list_of_params.update({'text': sys.argv[1], 'sl': sys.argv[2], 't': sys.argv[3]})
-		request = urllib2.Request(url % urllib.urlencode(list_of_params),
-		            headers={'User-Agent':'Mozilla/5.0', 'Accept-Charset': 'utf-8'})
-		res = urllib2.urlopen(request).read()
-		fixed_json = re.sub(r', {2, }', ',', res).replace(',]', ']')
-		data = json.loads(fixed_json)
-
-		print '%s / %s / %s' % (data[0][0][0], data[0][0][1], data[0][0][2] or data[0][0][3])
-
-		if not isinstance(data[1], basestring):
-			print data[1][0][0]
-			print_params(data[1][0][1])
-
-		try:
-			if not isinstance(data[1][1], basestring):
-				print data[1][1]
-				print_params(data[1][0][1])
-		except Exception:
-			print 'no interjection'
+		# sys.argv[0] - is script's filename, as i know now
+		fromlang = sys.argv[1]
+		tolang = sys.argv[2]
+		translate_str = sys.argv[3]
+		print translate(translate_str, fromlang, tolang)          # <--- here is the start
 
 	else:
-		print main.__doc__
+		print 'You should run this with args like "$ script.py en ru "hello"'
+		exit(1)
+
+def translate(translate_str, fromlang, tolang):
+	link = "http://translate.google.com/m?hl=%s&sl=%s&q=%s" % (tolang, fromlang, translate_str.replace(" ", "+"))
+	request = urllib2.Request(link, headers=agents)
+	page = urllib2.urlopen(request).read()
+	result = page[page.find(before_trans)+len(before_trans):]
+	result = result.split("<")[0]
+	return result
 
 if __name__ == '__main__':
-	main()
+	run()
+
+# TODO: This returns only one defenition per word!
+	# Change all with https://pypi.python.org/pypi/goslate
+	# especially use "Lookup Details in Dictionary" - section
