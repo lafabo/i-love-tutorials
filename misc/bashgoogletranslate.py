@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 #  -*- coding: utf-8 -*-
 '''
 this code uses urllib/2 to parse google translate, no api

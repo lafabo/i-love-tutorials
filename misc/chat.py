@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding: utf8
+#  -*- coding: utf-8 -*-
 # http://habrahabr.ru/post/151623/
 
 import socket
