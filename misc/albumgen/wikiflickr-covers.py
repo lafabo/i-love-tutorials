@@ -6,7 +6,7 @@
 
 
 import wikipedia, urllib, re, random, os
-from PIL import ImageFont, Image, ImageDraw
+from PIL import ImageFont, Image, ImageDraw, ImageOps
 
 
 #lang_list = ['ru', 'en', 'pl', 'uk', 'fr', 'cs'] # for more fun more languages
@@ -37,10 +37,9 @@ def getflickrphoto():
 
 def printcover(group, album, cover):
 	# let's chose random fonts
-	album_font = ImageFont.truetype('/usr/share/fonts/dejavu/DejaVuSans.ttf', 45)
-			#random.choice(os.listdir("/home/i/dev/i-love-tutorials/misc/albumgen/fonts")), 15)
+	album_font = ImageFont.truetype(('fonts/' + random.choice(os.listdir("fonts/"))), 45)
 
-	group_font = ImageFont.truetype('/usr/share/fonts/dejavu/DejaVuSans.ttf', 35)
+	group_font = ImageFont.truetype(('fonts/' + random.choice(os.listdir("fonts/"))), 35)
 	#print "\n\n\n\n\n", album_font, group_font
 
 	# cover image
