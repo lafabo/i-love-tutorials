@@ -56,7 +56,8 @@ def printcover(group, album, cover):
 	draw.text((0, 200), album, rand_color2, font=album_font)
 
 
-	cover_image.save('out.jpg')
+	out = cover_image.save('out.jpg')
+
 
 
 if __name__ == '__main__':
