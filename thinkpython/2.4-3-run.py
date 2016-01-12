@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from time import strptime
 
 starttime = '6:52:00'.split(":")
 
