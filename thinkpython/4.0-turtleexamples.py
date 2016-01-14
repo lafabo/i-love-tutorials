@@ -15,7 +15,7 @@ for i in range(4):
 
 def square(t, len):
 	for j in range(4):
-		fd(t, -len)
+		fd(t, len)
 		lt(t)
 
 len = 120
@@ -24,34 +24,34 @@ len = 120
 
 def polygon(t, len, n):
 	angle = 360.0 / n
-	for i in range(int(n)):
-		fd(t, len)
-		lt(t, angle)
+	polyline(t, n, len, angle)
 
 
 # print polygon(bob, 12, 16)
 
 
 trtl = Turtle()
-print trtl
 
 
 def circle(t, r):
-	total_n = 50
-	total_len = r * 2 * pi / total_n
-	t.delay = 0.01
-	print polygon(t, total_len, total_n)
+	arc(t, r, 360)
 
-circle(trtl, 30)
 
 def arc(t, r, angle):
-	n = 360.0 / angle
-	# total_len = r * 2 * pi / n
+	total_len = 2 * pi * r * angle / 360
+	n = int(total_len / 3) + 1
+	step_len = total_len / n
+	step_ang = float(angle) / n
 	t.delay = 0.01
-	for i in range(int(n)):
+	polyline(t, n, step_len, step_ang)
+
+
+def polyline(t, n, len, angle):
+	for i in range(n):
 		fd(t, len)
 		lt(t, angle)
 
-arc(trtl, 24, 360)
+circle(trtl, 30)
+arc(trtl, 72, 68)
 
 wait_for_user()
