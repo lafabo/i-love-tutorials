@@ -79,6 +79,30 @@ def circle(t, r):
 	arc(t, r, 360)
 
 
+def flower(turtle, radius, angle):
+	fl_range = 2 * math.pi * radius * angle / 360
+	for i in range(0, radius):                      # todo That's bad!
+		if i % 2 != 0:
+			print arc(turtle, fl_range, angle)
+			rt(bob, 180-angle)
+		else:
+			print arc(turtle, fl_range, angle)
+			lt(bob, 180-angle)
+
+
+
+def polygons(turtle, lenth, angles_num):
+	angle = int(360 / angles_num + 1)
+	for i in range(0, 3 * angles_num):                       # todo that's bad!!!
+		fd(turtle, lenth)
+		rt(turtle, 60)
+		fd(turtle, lenth)
+		rt(turtle, 60)
+		fd(turtle, lenth)
+		rt(turtle, 60)
+
+
+
 # the following condition checks whether we are
 # running as a script, in which case run the test code,
 # or being imported, in which case don't.
@@ -87,14 +111,10 @@ if __name__ == '__main__':
 	world = TurtleWorld()
 
 	bob = Turtle()
-	bob.delay = 0.001
+	bob.delay = 0.01
 
 	# draw a circle centered on the origin
-	radius = 100
-	pu(bob)
-	fd(bob, radius)
-	lt(bob)
-	pd(bob)
-	circle(bob, radius)
+	print polygons(bob, 30, 24)
+
 
 	wait_for_user()

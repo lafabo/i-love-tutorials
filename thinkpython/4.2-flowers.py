@@ -55,6 +55,6 @@ def flower(turtle, radius, angle):
 			lt(bob, 360-angle)
 
 
-print flower(bob, 20, 270)
+print flower(bob, 20, 27)
 
 wait_for_user()
