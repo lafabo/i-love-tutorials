@@ -93,13 +93,11 @@ def flower(turtle, radius, angle):
 
 def polygons(turtle, lenth, angles_num):
 	angle = int(360 / angles_num + 1)
-	for i in range(0, 3 * angles_num):                       # todo that's bad!!!
+	for i in range(0, angles_num):                       # todo that's bad!!!
 		fd(turtle, lenth)
-		rt(turtle, 60)
-		fd(turtle, lenth)
-		rt(turtle, 60)
-		fd(turtle, lenth)
-		rt(turtle, 60)
+		for z in range(0, 3):
+			fd(turtle, lenth)
+			rt(turtle, 60)
 
 
 
