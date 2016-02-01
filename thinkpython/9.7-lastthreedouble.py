@@ -1,15 +1,12 @@
-import re
+from re import match, search
+
 
 def is_doubled(word):
-	# damstupidpattern
-	c5,c4,c3,c2,c1=''
-	for i in len(word):
-		if (word[i-5]==word[i-4] and word[i-3]==word[i-2] and word[i-1]==word[i]):
-			print word
+	if match(r'([a-z])\1([a-z])\2([a-z])\3', word):
+		print word
 
 
-f = open('words.txt')
-for l in f:
+for l in open('words.txt'):
 	l = l.strip()
 	is_doubled(l)
 
