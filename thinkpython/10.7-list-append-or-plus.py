@@ -1,10 +1,21 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
+import datetime
 
-def timer()
+lst = []
 
-def doappend(lst):
+start = datetime.datetime.now()
+for i in open('words.txt'):
+	lst.append(i.split())
+
+print datetime.datetime.now() - start
 
 
-def doplus()
+lst = []
+
+start = datetime.datetime.now()
+for i in open('words.txt'):
+	lst += i.split()
+
+print datetime.datetime.now() - start

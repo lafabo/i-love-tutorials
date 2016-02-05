@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 from random import randint
 
+
 def has_dublicates(lst):
 	for i in lst:
 		if lst.count(i) > 1:
 			return False
-
 	return True
 
 bdays = []
