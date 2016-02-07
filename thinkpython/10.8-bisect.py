@@ -8,8 +8,8 @@ for i in open('words.txt').readlines():
 	lst.append(i.split('\r\n')[0])
 
 
-def check_is_word_in_list(word, lst):
-	return bisect.bisect(word, lst)
+def check_is_word_in_list(lst, word):
+	return bisect.bisect_left(lst, word)
 
 # print check_is_word_in_list(lst, 'weather')
 
@@ -38,11 +38,4 @@ def bisection(sorted_list, word):
 
 print bisection(lst, 'python')
 print check_is_word_in_list(lst, 'python')
-print lst[78834], lst[78835]
-
-
-# output:
-# 78834
-# 78835
-# python pythonic
-# pythonic WTF?
+print lst[78834]

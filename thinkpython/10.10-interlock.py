@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+# todo
+# this script totally not working
+# i'l make it one day
+
 from datetime import datetime
 
 lst =[]

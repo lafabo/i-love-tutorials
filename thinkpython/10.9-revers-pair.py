@@ -1,28 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from bisect import bisect_left
 
 lst =[]
 for i in open('words.txt').readlines():
 	lst.append(i.split('\r\n')[0])
-
-
-def bisection(sorted_list, word):
-	min = 0
-	max = len(sorted_list) - 1
-
-	while True:
-		i = (min + max) / 2
-
-		if max < min:
-			return None
-
-		if word == sorted_list[i]:
-			return i
-		elif word < sorted_list[i]:
-			max = i - 1
-		else:
-			min = i + 1
 
 
 # The simplest and slowest way:
@@ -37,17 +20,17 @@ for i in lst:
 print float(len(dub)/2)
 print datetime.now() - time1
 
-
+'''
 # Using bisect method:
 dub2 = []
 time2 = datetime.now()
 for i in lst:
-	if (i not in dub2) and (bisection(lst, i)):
+	if (i not in dub2) and (i[::-1] not in dub2) and (bisect_left(lst, i[::-1])):
 		dub2.append(i)
 		dub2.append(i[::-1])
 print float(len(dub2)/2)
 print datetime.now() - time2
-
+'''
 
 # output
 
