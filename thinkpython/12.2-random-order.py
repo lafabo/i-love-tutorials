@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from random import random
 
 def sort_by_length(words):
 	t = []
 	for word in words:
-		t.append((len(word), word))
+		t.append((len(word), random(), word))
 
 	t.sort(reverse=True)
 	res = []
-	for length, word in t:
+	for length, _, word in t:
 		res.append(word)
 	return res
 
