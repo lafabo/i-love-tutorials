@@ -28,7 +28,7 @@ def get_md5(lst):
 
 
 if __name__ == '__main__':
-	path = '/media/i/My_D/Camera Uploads'
+	path = '/home/i/Pictures/'
 	# print get_files_list(path)
 	# print get_md5(get_files_list(path))
 	hui = get_md5(get_files_list(path))
