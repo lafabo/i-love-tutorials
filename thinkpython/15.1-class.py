@@ -1,20 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from math import sqrt
+from copy import copy, deepcopy
 
 
 class Point(object):
-	""" point x, y"""
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
+	"""
+	here is point
+	"""
 
 
 class Rectangle(object):
-	def __init__(self, width, height, corner):
-		self.width = width
-		self.height = height
-		self.corner = Point
+	"""
+	here is an rectangle
+	"""
 
 
 def find_center(box):
@@ -31,13 +30,44 @@ def get_distance(point1, point2):
 
 
 def print_point(p):
-	pass
+	print '(%g, %g)' % (p.x, p.y)
+
+
+def move_rectangle(rect, dx, dy):
+	rect.corner.x += dx
+	rect.corner.y += dy
+	return rect
+
+
+def move_to_new_rectangle(rect, dx, dy):
+	newrect = deepcopy(rect)
+	newrect.corner.x += dx
+	newrect.corner.y += dy
+	return newrect
+
+
 
 if __name__ == '__main__':
-	p1 = Point(1, 4)
-	p2 = Point(5, 2)
+	p1 = Point()
+	p1.x = 1.0
+	p1.y = 4.0
+	p2 = Point()
+	p2.x = 2.0
+	p2.y = 1.0
 
-	print get_distance(p1, p2)
+	print 'distance between p1(%s, %s) and p2(%s, %s)' \
+	      ' = ' % (p1.x, p1.y, p2.x, p2.y), get_distance(p1, p2)
+
+	box = Rectangle()
+	box.width = 100.0
+	box.height = 200.0
+	box.corner = Point()
+	box.corner.x = 0.0
+	box.corner.y = 0.0
 
 	center = find_center(box)
-	# print_point
+	print_point(center)
+
+	print move_rectangle(box, 10.0, 12.0)
+	print move_to_new_rectangle(box, 10.0, 12.0)
+	print move_rectangle(box, 10.0, 12.0) is move_to_new_rectangle(box, 10.0, 12.0)
