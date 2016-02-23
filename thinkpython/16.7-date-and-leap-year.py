@@ -16,7 +16,20 @@ def increment_date(date, ndays):
 
 	feb
 
+def is_year_leap(date):
+	pass
 
+
+def increase_day():
+	pass
+
+
+def increase_month():
+	pass
+
+
+def increase_year():
+	pass
 
 
 if __name__ == '__main__':
