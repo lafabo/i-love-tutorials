@@ -9,7 +9,7 @@ class Date(object):
 
 
 def increment_date(date, ndays):
-
+	"""
 	# set up if month is february
 	if year % 4 == 0:
 		avalable_days = 28
@@ -20,6 +20,18 @@ def increment_date(date, ndays):
 		avalable_days = 31
 	elif date.m in (4, 9, 11):
 		avalable_days = 30
+	"""
+	"""
+	Как мне кажется, проще всего переводить дни в номер дня в году, прибавлять и смотреть
+	if today + days > 365:
+	 year ++
+	elif today + days < 365
+	 year = year
+	 m, d = divmod(today + days, 30) ----- вот тут имеет смысл использовать табличку выше,
+	 что бы узнать сколько в месяце текущем - дней
+	"""
+
+
 
 
 
