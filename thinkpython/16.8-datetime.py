@@ -17,12 +17,21 @@ days = {
 
 
 def get_next_birthday(fromdate):
-	bdate_year = datetime.datetime.year
+	bdate_year = datetime.datetime(1988, 3, 4)
+	#datetime.timedelta()
 
-	age = today.year - bdate_year
+	age = fromdate.year - bdate_year.year       # only years, not days month
+	return age
 
 
+def to_next_bday(fromday, bday):
+	if fromday.year < bday.year:
+		bday = bday.replace(year=today.year + 1)
 
+	days_to_bday = abs(fromday - bday)
+	return days_to_bday
 
 if __name__ == '__main__':
 	print days[today.weekday()]
+	print get_next_birthday(today)
+	print to_next_bday(today, datetime.datetime(2016, 3, 4))
