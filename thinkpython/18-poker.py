@@ -51,8 +51,12 @@ class Deck(object):
 		for i in range(num):
 			hand.add_card(self.pop_card())
 
-	# def deal_hands(self, players, cards):
-	# 	for i in
+	def deal_hands(self, players, cards):
+		for player in range(players):
+			hand_name = 'player' + str(player)
+			hand = Hand(hand_name)
+			for card in cards:
+				hand.add_card(self.pop_card())
 
 
 class Hand(Deck):
@@ -61,7 +65,10 @@ class Hand(Deck):
 		self.label = label
 
 
-
-
 if __name__ == '__main__':
 	print Deck
+	my_deck = Deck()
+	for i in range(100):
+		my_deck.shuffle()
+
+	my_deck.deal_hands(4, 7)
