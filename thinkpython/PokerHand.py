@@ -8,6 +8,7 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
 from Card import *
+from collections import Counter
 
 
 class PokerHand(Hand):
@@ -29,6 +30,24 @@ class PokerHand(Hand):
         self.suit_hist()
         for val in self.suits.values():
             if val >= 5:
+                return True
+        return False
+
+    def rank_hist(self):
+        self.ranks = Counter(self.cards.rank)
+
+    def has_pair:
+        for i in self.ranks():
+            if i[1] > 1:
+                return True
+        return False
+
+    def has_two_pair(self):
+        c = 0
+        for i in self.ranks():
+            if i[1] > 1:
+                c += 1
+            if c >= 2:
                 return True
         return False
 
