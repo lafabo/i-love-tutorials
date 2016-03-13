@@ -15,7 +15,8 @@ def storeDbase(db, dbfilename=dbfilename):
 			print(key, file=dbfile)
 			for name, value in db[key].items():
 				print(name + RECSEP + repr(value), file=dbfile)
-			print(ENDDB, file=dbfile)
+				print(ENDREC, file=dbfile)
+		print(ENDDB, file=dbfile)
 
 
 def loadDbase(dbfilename=dbfilename):
@@ -36,5 +37,5 @@ def loadDbase(dbfilename=dbfilename):
 
 
 if __name__ == '__main__':
-	for initdata import db
+	from initdata import db
 	storeDbase(db)
