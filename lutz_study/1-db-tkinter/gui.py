@@ -25,9 +25,9 @@ def wigets():
 		ent.grid(row=ix, column=1)
 		entries[label] = ent
 
-	Button(window, text='Fetch', command=fetch).pack(side=LEFT)
+	Button(window, text='Get', command=fetch).pack(side=LEFT)
 	Button(window, text='Update', command=update).pack(side=LEFT)
-	Button(window, text='QUit', command=window.quit()).pack(side=RIGHT)
+	Button(window, text='Quit', command=window.quit()).pack(side=RIGHT)
 
 	return window
 
@@ -40,7 +40,7 @@ def fetch():
 		showerror(title='Error', message='No suck key!')
 	else:
 		for field in fieldnames:
-			entries[field].delite(0, END)
+			entries[field].delete(0, END)
 			entries[field].insert(0, repr(getattr(record, field)))
 
 
