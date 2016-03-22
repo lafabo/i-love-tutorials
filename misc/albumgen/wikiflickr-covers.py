@@ -48,6 +48,7 @@ def printcover(group, album, cover):
 	text_album_size = album_font.getsize(album)
 	text_group_size = group_font.getsize(group)
 
+	#todo брать случайные цвета с https://flatuicolors.com/
 	rand_color = (random.randint(0, 255),random.randint(0, 255),random.randint(0, 255))
 	rand_color2 = (random.randint(0, 255),random.randint(0, 255),random.randint(0, 255))
 
