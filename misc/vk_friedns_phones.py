@@ -99,17 +99,17 @@ if __name__ == '__main__':
 		password = input('Password: ')
 		try:
 			vk_user = User(login, password)
-			api = vk_user.auth()
+			api = vk_user.auth():)
 			print('Autorized')
-			break
+			friends = vk_user.friends(api)
+			friends_count = vk_user.friends_count(api)
+			print('Found %s friends' % friends_count)
+			with Timer() as p:
+				users_phones = find_correct_phones(api, friends, friends_count)
+
+			save_csv(users_phones, 'vk.csv')
+			print('Data saved')
+
 		except Exception:
 			print('Wrong login/pass')
 
-	friends = vk_user.friends(api)
-	friends_count = vk_user.friends_count(api)
-	print('Found %s friends' % friends_count)
-	with Timer() as p:
-		users_phones = find_correct_phones(api, friends, friends_count)
-
-	save_csv(users_phones, 'vk.csv')
-	print('Data saved')
