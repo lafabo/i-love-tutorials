@@ -54,20 +54,20 @@ class Connect:
 		self.control('r')
 
 
-	def control(self, input):
+	def control(self, user_input):
 		print('----LOADING----')
-		if input == 'd':
+		if user_input == 'd':
 			self.dialogs()
-		elif input == 'exit':
+		elif user_input == 'exit':
 			os.system('clear')
 			sys.exit(0)
-		elif input == '':
+		elif user_input == '':
 			self.layer = ''
 		elif self.section = 'dialogs':
-			if input = 'r':
+			if user_input = 'r':
 				self.dialogs()
 			else:
-				self.dialogs(input)
+				self.dialogs(user_input)
 		os.system('clear')
 		print(self.layer)
 		self.control('%s' % raw_input('Enter the command: \n'))
