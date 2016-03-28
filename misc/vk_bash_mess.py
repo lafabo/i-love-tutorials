@@ -48,8 +48,33 @@ class Connect:
 			self.layer+= "--------------------------------------------\n"
 
 
+	def send(self, message):
+		message = urllib2.quote(message).encode('utf-8')
+		dialog = json.loads(urllib2.urlopen("https://api.vk.com/method/messages.send?user_id=%s&message=%s&access_token=%s&v=5.33" % (self.uid, message, self.access_token)).read().decode("utf-8"))
+		self.control('r')
+
+
+	def control(self, input):
+		print('----LOADING----')
+		if input == 'd':
+			self.dialogs()
+		elif input == 'exit':
+			os.system('clear')
+			sys.exit(0)
+		elif input == '':
+			self.layer = ''
+		elif self.section = 'dialogs':
+			if input = 'r':
+				self.dialogs()
+			else:
+				self.dialogs(input)
+		os.system('clear')
+		print(self.layer)
+		self.control('%s' % raw_input('Enter the command: \n'))
 
 
 
 if __name__ == '__main__':
 	os.system('clear')
+	vk = Connect(app_id, login, password)
+	vk.control('')
