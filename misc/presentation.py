@@ -58,6 +58,35 @@ def read_file(s):
 		return re.split('--- *\n?', f.read())
 
 
+def ip():
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	s.connect(('192.168.1.1', 0))                           # here is our server setting
+	return s.getsockname()[0]
+
+
+def make_url(port):
+	url = 'http://%s:%s%sprev' % (ip(), port, token)
+	print url
+	os.system('firefox "http://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=%s"' % url)
+
+
+def run():
+	for port in random.sample(xrange(8000, 9000), 1000):
+		try:
+			httpd = BaseHTTPServer.HTTPServer(('', port), Hanbler)
+			httpd.server_activate()
+			make_url(port)
+			httpd.serve_forever()
+		except socket.error, e:
+			if e.errno not in (98, ):
+				print e
+				exit()
+		except KeyboardInterrupt:
+			print('\n\nExiting')
+			exit()
+
 
 if __name__ == '__main__':
-	pass
+	data = read_file('notes.txt')
+	print('Got %s slides' % len(data))
+	run()
