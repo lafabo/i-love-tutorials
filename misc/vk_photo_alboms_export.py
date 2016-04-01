@@ -46,13 +46,47 @@ def sizeof_fmt(num):
 		num /= 1024.0
 
 
-def main_cycle():
-
-
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='', version='%s' )
 	parser.add_argument('username')
 	#
 	args = parser.parse_args()
 
-	if args.output.star
+	if args.output.startwith('~'):
+		args.output = os.path.expanduser(args.output)
+
+	start_time = datetime.datetime.now()
+	try:
+		password = getpass('Password: ')
+		connection = connect(args.username, password)
+
+		albums = get_albums(connection)
+		print('Found %s' % len(albums))
+
+		ix = 0
+		for album in albums:
+			print('%sd. %-40s %4s item(s)' % (ix+1,  album['title'], album['size'])
+			ix += 1
+
+		time.sleep(1)
+
+		if not os.path.exists(args.output):
+			os.makedirs(args.output)
+
+		for album in albums:
+			response = get_photos(connection, album['aid'])
+			output = os.path.join(args.output, album['title'])
+			if not os.path.exists(output):
+				os.makedirs(args.output)
+
+			processed = 0
+
+			for photo in response:
+				percent = round(float(processed) / float(len(response)) * 100, 2)
+				sys.stdout.flush()
+
+				download(photo, output)
+				processed += 1
+
+	finally:
+		print('Done in %s' % (datetime.datetime.now()-start_time))
