@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
 		ix = 0
 		for album in albums:
-			print('%sd. %-40s %4s item(s)' % (ix+1,  album['title'], album['size'])
+			print('%sd. %-40s %4s item(s)' % (ix+1,  album['title'], album['size']))
 			ix += 1
 
 		time.sleep(1)
