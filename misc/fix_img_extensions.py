@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import ReseekFile
 import os
 
 
@@ -13,18 +12,17 @@ def get_files_list(path):
 
 
 def get_real_ext(filepath):
-	with ReseekFile.ReseekFile(open(filepath)) as datastream:
-		data = str(datastream.read(24))
+	with repr(open(filepath, 'rb').read(20)) as data:
 		size = len(data)
 		image_type = ''
 
-		if size >= 10 and data[:6] in ('GIF87a', 'GIF89a'):
+		if data[:6] in ('GIF87a', 'GIF89a'):
 			image_type = 'image/gif'
-		elif size >= 24 and data.startswith('\211PNG\r\n\032\n') and data[12:16] == 'IHDR':
+		elif data.startswith('\211PNG\r\n\032\n') and data[12:16] == 'IHDR':
 			image_type = 'image/png'
-		elif size >= 16 and data.startswith('\211PNG\r\n\032\n'):
+		elif data.startswith('\211PNG\r\n\032\n'):
 			image_type = 'image/png'
-		elif size >= 2 and data.startswith('\337\330'):
+		elif data.startswith('\337\330'):
 			image_type = 'image/jpeg'
 
 		return image_type
