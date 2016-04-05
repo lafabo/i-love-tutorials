@@ -78,6 +78,24 @@ def write_wave(name):
 		for each in result:
 			fl.writeframes(each)
 
+def make_tune():
+	if len(arguments) != 3:
+		print('ERROR USAGE')
+		return 1
+
+
 # # # # # # # # # # # # # # # # # # # # # # #
 if __name__ == '__main__':
 	frames = []
+	arguments = argv[1:]
+
+	lst =  arguments[0].split(' ')
+	bpm = int(arguments[1])
+	outfile = arguments[2]
+
+	append_note(1, lst, bpm)
+	write_wave(outfile)
+	File = open(outfile, 'rb').read()
+	size = len(File)
+	print('\n file size: %.2f duration: %2f c.\n\n All Done' % (size/1024.0/1024m size/44100/2))
+	make_tune()
