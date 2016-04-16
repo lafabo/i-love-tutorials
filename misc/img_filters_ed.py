@@ -42,8 +42,31 @@ def negative(image):
 			image.draw.point((i, j), (255-a, 255-b, 255-c))
 
 
-def blackwhite(image):
+def blackandwhite(image):
+	for i in range(image.width):
+		for j in range(image.height):
+			a = image.pix[i, j][0]
+			b = image.pix[i, j][1]
+			c = image.pix[i, j][2]
+			S = a + b + c
+			if S > (((255 + factor) // 2) * 3):
+				a, b, c = 255, 255, 255
+			else:
+				a, b, c = 0, 0, 0
+			draw.point((i, j), (a, b, c))
+
+
+def brightness(image, factor):
 	pass
+
+
+def noize(image, factor):
+	pass
+
+
+def contrast(image, factor):
+	pass
+
 
 if __name__ == '__main__':
 
