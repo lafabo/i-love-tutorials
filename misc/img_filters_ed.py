@@ -91,7 +91,20 @@ def noize(image, factor=5):
 
 
 def contrast(image, factor):
-	pass
+	degree = min(max(-100, factor), 100)
+	_contrast = (factor + 100.0) / 100.0
+	_contrast **= 2
+
+	for i in xrange(image.width):
+		for j in xrange(image.height):
+			a = (image.pix[i, j][0] * _contrast + 0.5) * 255
+			b = (image.pix[i, j][1] * _contrast + 0.5) * 255
+			c = (image.pix[i, j][2] * _contrast + 0.5) * 255
+			a = min(max(a, 0), 255)
+			b = min(max(b, 0), 255)
+			c = min(max(c, 0), 255)
+
+			image.draw.point((i, j), (a, b, c))
 
 
 if __name__ == '__main__':
