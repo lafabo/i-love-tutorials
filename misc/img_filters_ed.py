@@ -92,11 +92,11 @@ def noize(image, factor=5):
 
 def contrast(image, factor):
 	degree = min(max(-100, factor), 100)
-	_contrast = (factor + 100.0) / 100.0
+	_contrast = (degree + 100.0) / 100.0
 	_contrast **= 2
 
-	for i in xrange(image.width):
-		for j in xrange(image.height):
+	for i in range(image.width):
+		for j in range(image.height):
 			a = (image.pix[i, j][0] * _contrast + 0.5) * 255
 			b = (image.pix[i, j][1] * _contrast + 0.5) * 255
 			c = (image.pix[i, j][2] * _contrast + 0.5) * 255
@@ -105,6 +105,36 @@ def contrast(image, factor):
 			c = min(max(c, 0), 255)
 
 			image.draw.point((i, j), (a, b, c))
+
+
+# FINALLY! FILTERS! HURRAY!
+def ice(image):
+	for i in range(image.width):
+		for j in range(image.height):
+			a = image.pix[i, j][0]
+			b = image.pix[i, j][1]
+			c = image.pix[i, j][2]
+
+			a = min(255, int(abs(a - b - c) * 3 / 2))
+			b = min(255, int(abs(b - c - a) * 3 / 2))
+			c = min(255, int(abs(c - a - b) * 3 / 2))
+
+			image.draw.point((i, j), (a, b, c))
+
+
+def comic(image):
+	for i in range(image.width):
+		for j in range(image.height):
+			a = image.pix[i, j][0]
+			b = image.pix[i, j][1]
+			c = image.pix[i, j][2]
+
+			a = abs(b - c + b + a) * a / 256
+			b = abs(c - b + c + a) * a / 256
+			c = abs(c - b + c + a) * a / 256
+
+			image.draw.point((i, j), (a, b, c))
+
 
 
 if __name__ == '__main__':
