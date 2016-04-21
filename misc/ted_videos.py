@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import requests, re, sys
-from subprocess import popen
-
+from subprocess import Popen
 def get_download_link(url):
 	request = requests.get(url)
 	program = re.compile('http://download.ted.com/talks/[^\"]*480p-en.mp4')
@@ -21,7 +20,7 @@ def download(url):
 	complete_url = "http://www.ted.com" + url
 	download_link = get_download_link(complete_url)
 	download_name = download_link[download_link.rfind("/")+1:]
-	popen('wget -c -O \"%s\" \"%s\"\n' % (download_name, download_link))
+	Popen('wget -c -O \"%s\" \"%s\"\n' % (download_name, download_link))
 
 
 if __name__ == '__main__':
