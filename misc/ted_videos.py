@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from bs4 import BeautfulSoup
+from bs4 import BeautifulSoup
 import requests, re, sys
 from subprocess import popen
 
@@ -26,7 +26,7 @@ def download(url):
 
 if __name__ == '__main__':
 	r = requests.get(sys.argv[1])
-	soup = BeautfulSoup(r.text)
+	soup = BeautifulSoup(r.text)
 	for item in create_download_list(soup)
 		download(item)
 
