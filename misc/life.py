@@ -11,25 +11,26 @@ def refresh():
 			k = 0
 			for i_shift in range(-1, 2):
 				for j_shift in range(-1, 2):
-					if (canvas.gettags(cell_matrix[addr(i+i_shift, j + j_shift)])[0] == 'vis' and (i_shift!=0 or j_shift != 0)):
+					if canvas.gettags(cell_matrix[addr(i + i_shift, j + j_shift)])[0] == 'vis' and (
+							i_shift != 0 or j_shift != 0):
 						k += 1
 			current_tag = canvas.gettags(cell_matrix[addr(i, j)])[0]
 			if k == 3:
 				canvas.itemconfig(cell_matrix[addr(i, j)], tags=(current_tag, 'to_vis'))
-			if(k = 4):
+			if k == 4:
 				canvas.itemconfig(cell_matrix[addr(i, j)], tags=(current_tag, 'to_hid'))
-			if(k == 2 and canvas.gettags(sm[addr(i, j)])[0] == 'vis'):
+			if k == 2 and canvas.gettags(cell_matrix[addr(i, j)])[0] == 'vis':
 				canvas.itemconfig(cell_matrix[addr(i, j)], tags=(current_tag, 'to_vis'))
 
 
 def repaint():
 	for i in range(field_height):
 		for j in range(field_width):
-			if canvas.gettags(sm[addr(i, j)])[1] == 'to_hid':
-				canvas.itemconfig(sm[addr(i, j)], state=HIDDEN, tags=('hid', '0'))
+			if canvas.gettags(cell_matrix[addr(i, j)])[1] == 'to_hid':
+				canvas.itemconfig(cell_matrix[addr(i, j)], state=HIDDEN, tags=('hid', '0'))
 
-			if canvas.gettags(sm[addr(i, j)])[1] == 'to_vis':
-				canvas.itemconfig(sm[addr(i, j)], state=NORMAL, tags=('vis', '0'))
+			if canvas.gettags(cell_matrix[addr(i, j)])[1] == 'to_vis':
+				canvas.itemconfig(cell_matrix[addr(i, j)], state=NORMAL, tags=('vis', '0'))
 
 
 def step():
@@ -37,15 +38,32 @@ def step():
 	repaint()
 
 
+def draw_a(e):
+	ii = (e.y - 3) / cell_size
+	jj = (e.x - 3) / cell_size
+	canvas.itemconfig(cell_matrix[addr(ii, jj)], state=NORMAL, tags='vis')
+
+
+def addr(ii, jj):
+	if ii < 0 or jj < 0 or ii >= field_height or jj >= field_width:
+		return len(cell_matrix) - 1
+	else:
+		return ii * (w / cell_size) + jj
+
+
+def clear():
+	pass
+
+
 if __name__ == '__main__':
 	root = Tk()
 	w = 350
-	h = 370
-	#window size w h
+	h = 390
+	# window size
 	root.geometry('%sx%s' % (w, h))
 	cell_size = 20
 
-	canvas = Canvas(root, h)
+	canvas = Canvas(root, height=h)
 	canvas.pack(fill=BOTH)
 
 	field_height = h / cell_size
@@ -76,6 +94,7 @@ if __name__ == '__main__':
 
 	frame.pack(side='bottom')
 
-	canvas.bind('', draw_a)
+	canvas.bind('<B1-Motion>', draw_a)
+	canvas.bind('<ButtonPress>', draw_a)
 
 	root.mainloop()
