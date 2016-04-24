@@ -52,15 +52,17 @@ def addr(ii, jj):
 
 
 def clear():
-	pass
+	for i in range(field_height):
+		for j in range(field_width):
+			canvas.itemconfig(cell_matrix[addr(i, j)], state=HIDDEN, tags=('hid','0'))
 
 
 if __name__ == '__main__':
 	root = Tk()
 	w = 350
-	h = 390
+	h = 370
 	# window size
-	root.geometry('%sx%s' % (w, h))
+	root.geometry('%sx%s' % (w, h+30))
 	cell_size = 20
 
 	canvas = Canvas(root, height=h)
