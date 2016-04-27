@@ -1,20 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import SpeechRecognition as sr
+import speech_recognition as sr
 import subprocess
 import os
 
 
 def wav_to_text(wav):
 	r = sr.Recognizer()
-	with sr.AudioFile(AUDIO_FILE) as source:
+	with sr.AudioFile(wav) as source:
 		audio = r.record(source) # read the entire audio file
 
 	try:
 	# for testing purposes, we're just using the default API key
 	# to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
 	# instead of `r.recognize_google(audio)`
-		return r.recognize_google(audio)
+		print r.recognize_google(audio)
+	except:
+		print '\n\n\n\t\t\tsorry'
 
 def mpegs_in_dir(path):
 	exten = '.mp4'
@@ -26,7 +28,7 @@ def mpegs_in_dir(path):
 	# return list
 	return result
 
-def convert_mpeg_to_mp3(mpeg_file):
+def mpeg_to_wav(mpeg_file):
 	# filepath, filename = os.path.split(mpeg_file)
 	command = 'ffmpeg -i %s -ab 160K -ac 2 -ar 44100 -vn %s' % (
 		mpeg_file, mpeg_file + '.wav')
@@ -35,4 +37,8 @@ def convert_mpeg_to_mp3(mpeg_file):
 
 
 if __name__ == '__main__':
-	pass
+	# test source
+	#video = '/media/i/My_D/MAH01960.MP4'
+	#wav_to_text(video+'.wav')
+	#wav_to_text(mpeg_to_wav(video))
+	wav_to_text('/media/i/My_D/90.wav')
