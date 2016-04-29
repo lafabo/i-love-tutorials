@@ -29,3 +29,5 @@ def notify(users):
 
 if __name__ == '__main__':
 	pass
+
+#todo Make this s*t work
