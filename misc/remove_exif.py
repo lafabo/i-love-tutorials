@@ -28,5 +28,6 @@ def get_images_in_dir(path):
 					if check_has_exif(path):
 						filelist.append(path)
 
+
 if __name__ == '__main__':
 	pass
