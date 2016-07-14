@@ -10,14 +10,17 @@
         <li>{{ person.mail }}</li>
         <li>{{ person.website }}</li>
     </ul>
+    <p>{{ person.summary }}</p>
     <div>
-        {% for work in expirence %}
-            <div>
-                <h2>{{ work.position }}</h2>
-                <span>{{ work.timefrom }} - {{ work.timeto }}</span>
-                <p>{{ work.description }}</p>
-            </div>
-        {% endfor %}
+        {% if experience %}
+            {% for work in experience %}
+                <div>
+                    <h2>{{ work.position }}</h2>
+                    <span>{{ work.fromtime|date:"M Y" }} - {{ work.totime|date:"M Y" }}</span>
+                    <p>{{ work.description }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </body>
 </html>

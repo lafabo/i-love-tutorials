@@ -6,9 +6,11 @@ class Person(models.Model):
     name = models.CharField(max_length=30)
     lastname = models.CharField(max_length=30)
     mail = models.EmailField()
-    phone = models.CharField(max_length=10)
+    phone = models.CharField(max_length=12)
+    website = models.URLField(verbose_name='Homepage url')
     skype = models.CharField(max_length=30)
-    website = models.URLField()
+    summary = models.TextField(blank=True)
+    photo = models.ImageField(upload_to='/media/')
 
 
 class Experience(models.Model):

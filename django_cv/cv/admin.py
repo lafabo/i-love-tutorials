@@ -3,8 +3,8 @@ from .models import *
 
 
 class PersonAdmin(admin.ModelAdmin):
-    fields = ['name', 'lastname', 'phone', 'mail', 'skype']
-
+    # fields = ['name', 'lastname', 'phone', 'mail', 'skype']
+    list_display = ['name', 'lastname', 'phone', 'mail', 'skype']
 
 admin.site.register(Person, PersonAdmin)
 
