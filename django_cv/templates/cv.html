@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>{{ person.name }} {{ person.lastname }} - CV</title>
+</head>
+<body>
+    <h1>{{ person.name }} {{ person.lastname }} - CV</h1>
+    <ul>
+        <li>{{ person.phone }}</li>
+        <li>{{ person.skype }}</li>
+        <li>{{ person.mail }}</li>
+        <li>{{ person.website }}</li>
+    </ul>
+    <div>
+        {% for work in expirence %}
+            <div>
+                <h2>{{ work.position }}</h2>
+                <span>{{ work.timefrom }} - {{ work.timeto }}</span>
+                <p>{{ work.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -11,22 +11,26 @@ class Person(models.Model):
     website = models.URLField()
 
 
-class WorkExpirience(models.Model):
+class Experience(models.Model):
+    ref = models.ForeignKey(Person, related_name='work')
     position = models.CharField(max_length=30)
     company = models.CharField(max_length=30)
     fromtime = models.DateField()
     totime = models.DateField()
     description = models.TextField()
 
-
-class KeySkills(models.Model):
+'''
+class KeySkills(Person):
+    ref = models.ForeignKey(Person, related_name='skills')
     skill = models.CharField(max_length=200)
 
 
-class Education(models.Model):
+class Education(Person):
+    ref = models.ForeignKey(Person, related_name='edu')
     institution = models.CharField(max_length=60)
     institution_website = models.URLField(max_length=60)
     faculty = models.CharField(max_length=140)
     fromtime = models.DateField()
     totime = models.DateField()
     description = models.TextField()
+'''
