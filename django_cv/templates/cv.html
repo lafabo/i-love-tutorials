@@ -5,22 +5,64 @@
 <body>
     <h1>{{ person.name }} {{ person.lastname }} - CV</h1>
     <ul>
-        <li>{{ person.phone }}</li>
-        <li>{{ person.skype }}</li>
-        <li>{{ person.mail }}</li>
-        <li>{{ person.website }}</li>
+        {% if person.phone %}<li>{{ person.phone }}</li>{% endif %}
+        {% if person.skype %}<li>{{ person.skype }}</li>{% endif %}
+        {% if person.mail %}<li>{{ person.mail }}</li>{% endif %}
+        {% if person.website %}<li>{{ person.website }}</li>{% endif %}
     </ul>
-    <p>{{ person.summary }}</p>
-    <div>
-        {% if experience %}
+    {% if person.summary %}<p>{{ person.summary }}</p>{% endif %}
+
+    {% if experience %}
+        <div>
+            <h2>Experience</h2>
             {% for work in experience %}
                 <div>
                     <h2>{{ work.position }}</h2>
-                    <span>{{ work.fromtime|date:"M Y" }} - {{ work.totime|date:"M Y" }}</span>
+
+                    {% if work.totime %}
+                        <span>{{ work.fromtime|date:"M Y" }} - {{ work.totime|date:"M Y" }}</span>
+                    {% else %}
+                        <span>From {{ work.fromtime|date:"M Y" }} until now</span>
+                    {% endif %}
+
                     <p>{{ work.description }}</p>
                 </div>
             {% endfor %}
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
+
+
+    {% if keyskills %}
+        <div>
+            <h2>Key Skills</h2>
+            <ul>
+            {% for skill in keyskills %}
+               <li>{{ skill.skill }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if education %}
+        <div>
+            <h2>Education</h2>
+            {% for study in education %}
+                <div>
+                    <h2>{{ study.institution }}</h2>
+                    <h3>{{ study.faculty }}</h3>
+                    {% if study.institution_website %}<a href="{{ study.institution_website }}">{{ study.institution_website }}</a><br />{% endif %}
+
+                    {% if study.totime %}
+                        <span>{{ study.fromtime|date:"M Y" }} - {{ study.totime|date:"M Y" }}</span>
+                    {% else %}
+                        <span>From {{ study.fromtime|date:"M Y" }} until now</span>
+                    {% endif %}
+
+                    <p>{{ study.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 </body>
 </html>
