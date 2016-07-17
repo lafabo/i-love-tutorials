@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.db import models
 from django.utils.safestring import mark_safe
+from sorl.thumbnail import ImageField
 
 
 # Create your models here.
@@ -11,13 +13,13 @@ class Person(models.Model):
     website = models.URLField(verbose_name='Homepage url', blank=True)
     skype = models.CharField(max_length=30, blank=True)
     summary = models.TextField(blank=True)
-    photo = models.ImageField(upload_to='photo/', blank=True)
+    photo = ImageField(upload_to='photo', blank=True)
 
     def __str__(self):
         return self.name
 
     def image_tag(self):
-        return mark_safe('<img src="%s" width="150" height="150" />' % self.photo)
+        return mark_safe('<img src="/media/%s" width="150" />' % self.photo)
 
 
 class Experience(models.Model):

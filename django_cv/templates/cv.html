@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <html>
 <head>
     <title>{{ person.name }} {{ person.lastname }} - CV</title>
@@ -9,6 +10,13 @@
         {% if person.skype %}<li>{{ person.skype }}</li>{% endif %}
         {% if person.mail %}<li>{{ person.mail }}</li>{% endif %}
         {% if person.website %}<li>{{ person.website }}</li>{% endif %}
+        {% if person.photo %}
+            {{ person.photo }}
+            <img src="{{ person.photo }}" />
+            {% thumbnail person.photo "350" crop="center" as im %}
+                <li><img src="{{ im.url }}" /></li>
+            {% endthumbnail %}djan
+        {% endif %}
     </ul>
     {% if person.summary %}<p>{{ person.summary }}</p>{% endif %}
 
