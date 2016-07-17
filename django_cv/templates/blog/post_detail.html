@@ -1,0 +1,11 @@
+{% block content %}
+<div>
+    {% if post.published_date %}
+        <span>{{ post.published_date|date:"d.m.Y" }}</span>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    {% else %}
+        <div>Sorry, nothing here</div>
+    {% endif %}
+</div>
+{% endblock %}

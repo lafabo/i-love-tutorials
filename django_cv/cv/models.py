@@ -11,7 +11,7 @@ class Person(models.Model):
     website = models.URLField(verbose_name='Homepage url', blank=True)
     skype = models.CharField(max_length=30, blank=True)
     summary = models.TextField(blank=True)
-    photo = models.ImageField(upload_to='photo', blank=True)
+    photo = models.ImageField(upload_to='photo/', blank=True)
 
     def __str__(self):
         return self.name
