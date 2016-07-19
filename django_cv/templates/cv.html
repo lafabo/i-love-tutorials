@@ -1,4 +1,3 @@
-{% load thumbnail %}
 <html>
 <head>
     <title>{{ person.name }} {{ person.lastname }} - CV</title>
@@ -11,11 +10,7 @@
         {% if person.mail %}<li>{{ person.mail }}</li>{% endif %}
         {% if person.website %}<li>{{ person.website }}</li>{% endif %}
         {% if person.photo %}
-            {{ person.photo }}
-            <img src="{{ person.photo }}" />
-            {% thumbnail person.photo "350" crop="center" as im %}
-                <li><img src="{{ im.url }}" /></li>
-            {% endthumbnail %}djan
+            <li><img src="{{ person.photo }}" /></li>
         {% endif %}
     </ul>
     {% if person.summary %}<p>{{ person.summary }}</p>{% endif %}
@@ -72,5 +67,22 @@
         </div>
     {% endif %}
 
+    {% if bloglast6 %}
+    <h2>Last blog activity</h2>
+        {% for post in bloglast6 %}
+            <h3>{{ post.title }}</h3>
+            <p>
+                {{ post.text|truncatewords:20 }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        <form method="post">
+            {{ feedback.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
 </body>
 </html>
