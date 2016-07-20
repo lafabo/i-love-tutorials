@@ -9,13 +9,13 @@ from .forms import FeedbackForm
 # Create your views here.
 def index(request):
     template = loader.get_template('cv.html')
-    form = FeedbackForm()
+    # form = FeedbackForm()
     context = {
         'person': Person.objects.first(),
         'experience': Experience.objects.all().order_by('-fromtime'),
         'keyskills': KeySkills.objects.all(),
         'education': Education.objects.all().order_by('-fromtime'),
         'bloglast6':  Post.objects.all().order_by('-published_date')[:6],
-        'feedback': form,
+        'feedback': FeedbackForm,
     }
     return HttpResponse(template.render(context, request))
